@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lorenzo Remy — Mechanical Engineer</title>
+<meta name="description" content="Lorenzo Remy — Mechanical Engineer. Aerospace design, build & test. CAD / Design for Manufacturing portfolio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0e12;
+    --bg2:#11141a;
+    --panel:#161a22;
+    --line:#262c38;
+    --line2:#323a4a;
+    --ink:#e9edf4;
+    --muted:#8b94a6;
+    --dim:#5d6678;
+    --accent:#ff5a2c;       /* signal orange — thrust/heat */
+    --accent2:#36c2c8;      /* cool teal — CAD sketch */
+    --grid: rgba(255,255,255,.035);
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Archivo',system-ui,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* blueprint grid backdrop */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(var(--grid) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:48px 48px;
+    mask-image:radial-gradient(circle at 50% 0%,#000 0%,#000 55%,transparent 100%);
+  }
+  .mono{font-family:'IBM Plex Mono',monospace}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+  /* ---- top bar ---- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(12,14,18,.72);
+    border-bottom:1px solid var(--line);
+  }
+  .bar{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em}
+  .brand .dot{width:9px;height:9px;background:var(--accent);border-radius:50%;box-shadow:0 0 12px var(--accent);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  nav.links{display:flex;gap:26px}
+  nav.links a{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+  nav.links a:hover{color:var(--ink)}
+  @media(max-width:680px){nav.links{display:none}}
+
+  /* ---- hero ---- */
+  .hero{padding:150px 0 90px;position:relative}
+  .tag{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:26px}
+  .tag::before{content:"";width:34px;height:1px;background:var(--accent)}
+  h1{
+    font-size:clamp(48px,9vw,104px);line-height:.92;font-weight:900;letter-spacing:-.03em;
+  }
+  h1 .l2{color:var(--dim)}
+  .role{margin-top:22px;font-size:clamp(17px,2.4vw,22px);color:var(--muted);max-width:640px;font-weight:400}
+  .role b{color:var(--ink);font-weight:600}
+  .meta{margin-top:30px;display:flex;flex-wrap:wrap;gap:10px 28px;font-size:13px;color:var(--muted)}
+  .meta span{display:flex;align-items:center;gap:8px}
+  .meta i{color:var(--accent2);font-style:normal}
+  .cta{margin-top:40px;display:flex;flex-wrap:wrap;gap:14px}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;padding:14px 22px;font-size:13.5px;font-weight:600;
+    letter-spacing:.02em;border:1px solid var(--line2);border-radius:6px;color:var(--ink);
+    background:var(--panel);transition:.2s;
+  }
+  .btn:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#1a0c06;font-weight:700}
+  .btn.primary:hover{box-shadow:0 8px 30px rgba(255,90,44,.35)}
+  .btn .ar{font-family:'IBM Plex Mono',monospace}
+
+  /* reveal animation */
+  .rv{opacity:0;transform:translateY(22px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  /* ---- section heads ---- */
+  section{padding:74px 0;position:relative}
+  .shead{display:flex;align-items:baseline;gap:18px;margin-bottom:42px;border-bottom:1px solid var(--line);padding-bottom:18px}
+  .snum{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent)}
+  .shead h2{font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-.02em}
+  .shead .note{margin-left:auto;font-size:12px;color:var(--dim);font-family:'IBM Plex Mono',monospace;text-align:right}
+  @media(max-width:560px){.shead .note{display:none}}
+
+  /* ---- portfolio doc cards ---- */
+  .docs{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:760px){.docs{grid-template-columns:1fr}}
+  .doc{
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg2);
+    display:flex;flex-direction:column;transition:.25s;position:relative;
+  }
+  .doc:hover{border-color:var(--line2);transform:translateY(-4px)}
+  .doc .thumb{height:200px;overflow:hidden;position:relative;border-bottom:1px solid var(--line);background:#0a0c10}
+  .doc .thumb img{width:100%;height:100%;object-fit:cover;opacity:.9;transition:.5s}
+  .doc:hover .thumb img{transform:scale(1.05);opacity:1}
+  .doc .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(12,14,18,.85))}
+  .doc .badge{position:absolute;top:14px;left:14px;z-index:2;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;background:rgba(12,14,18,.8);border:1px solid var(--line2);border-radius:4px;color:var(--accent2)}
+  .doc .body{padding:24px;display:flex;flex-direction:column;gap:14px;flex:1}
+  .doc h3{font-size:21px;font-weight:700;letter-spacing:-.01em;line-height:1.15}
+  .doc p{font-size:14px;color:var(--muted)}
+  .doc .acts{margin-top:auto;display:flex;gap:10px;padding-top:6px}
+  .doc .acts a{flex:1;justify-content:center;font-size:12.5px;padding:11px 14px}
+
+  /* ---- project list ---- */
+  .projects{display:flex;flex-direction:column;gap:0}
+  .proj{
+    display:grid;grid-template-columns:90px 1.4fr 1fr;gap:30px;align-items:center;
+    padding:30px 0;border-top:1px solid var(--line);transition:.2s;
+  }
+  .proj:hover{background:linear-gradient(90deg,rgba(255,90,44,.04),transparent)}
+  .proj .pid{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--dim)}
+  .proj .pmain h3{font-size:20px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+  .proj .pmain .org{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent);letter-spacing:.04em;margin-bottom:10px}
+  .proj .pmain p{font-size:14px;color:var(--muted)}
+  .proj .pimg{height:120px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#0a0c10}
+  .proj .pimg img{width:100%;height:100%;object-fit:cover;opacity:.88}
+  .proj:hover .pimg img{opacity:1}
+  .proj .tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:7px}
+  .proj .tags span{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted);border:1px solid var(--line);padding:3px 8px;border-radius:3px}
+  @media(max-width:780px){
+    .proj{grid-template-columns:1fr;gap:16px}
+    .proj .pid{display:none}
+    .proj .pimg{height:170px;order:-1}
+  }
+
+  /* ---- capabilities strip ---- */
+  .caps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  @media(max-width:760px){.caps{grid-template-columns:1fr 1fr}}
+  .cap{border:1px solid var(--line);border-radius:10px;padding:22px;background:var(--bg2)}
+  .cap .ct{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+  .cap ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .cap li{font-size:13.5px;color:var(--muted)}
+  .cap li::before{content:"▸ ";color:var(--accent);font-size:11px}
+
+  /* ---- footer / contact ---- */
+  footer{border-top:1px solid var(--line);padding:70px 0 50px;margin-top:30px}
+  .fc{display:flex;flex-wrap:wrap;justify-content:space-between;gap:30px;align-items:flex-end}
+  .fc h2{font-size:clamp(30px,5vw,52px);font-weight:900;letter-spacing:-.03em;line-height:.95}
+  .fc .accent{color:var(--accent)}
+  .contacts{display:flex;flex-direction:column;gap:12px}
+  .contacts a{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--muted);display:flex;align-items:center;gap:12px;transition:.2s}
+  .contacts a:hover{color:var(--accent)}
+  .contacts a .k{color:var(--dim);width:74px;display:inline-block}
+  .colophon{margin-top:46px;padding-top:24px;border-top:1px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <div class="brand"><span class="dot"></span>LORENZO&nbsp;REMY</div>
+    <nav class="links">
+      <a href="#portfolios">Portfolios</a>
+      <a href="#projects">Projects</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="tag rv mono" style="animation-delay:.05s">Mechanical Engineering · Design / Build / Test</div>
+      <h1 class="rv" style="animation-delay:.12s">LORENZO<br><span class="l2">REMY</span></h1>
+      <p class="role rv" style="animation-delay:.22s">
+        Mechanical engineer working across the full hardware lifecycle — <b>analytical design</b>,
+        <b>manufacturability</b>, <b>assembly</b>, and <b>validation</b>. Aerospace development,
+        high-powered rocketry, and industrial rotating equipment.
+      </p>
+      <div class="meta rv mono" style="animation-delay:.3s">
+        <span><i>◷</i> Los Angeles, CA</span>
+        <span><i>◆</i> B.S. Mechanical Engineering, LMU</span>
+        <span><i>✦</i> NDT Level II (MT · UT)</span>
+        <span><i>⬡</i> SolidWorks · DFM</span>
+      </div>
+      <div class="cta rv" style="animation-delay:.4s">
+        <a class="btn primary" href="#portfolios">View Portfolios <span class="ar">→</span></a>
+        <a class="btn" href="pdf/Lorenzo-Remy_Mechanical-Systems-Portfolio.pdf" target="_blank">Systems PDF <span class="ar mono">↗</span></a>
+        <a class="btn" href="pdf/Lorenzo-Remy_DFM-Design-Portfolio.pdf" target="_blank">CAD / DFM PDF <span class="ar mono">↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIOS -->
+  <section id="portfolios">
+    <div class="wrap">
+      <div class="shead">
+        <span class="snum">01</span>
+        <h2>Portfolios</h2>
+        <span class="note">Open or download — no firewall-blocked share links</span>
+      </div>
+      <div class="docs">
+        <article class="doc">
+          <div class="thumb"><span class="badge">Design · Build · Test</span><img src="img/rocket.png" alt="Full-scale 3D-printed high-powered rocket on test stand"></div>
+          <div class="body">
+            <h3>Mechanical Systems<br>Design, Build &amp; Test</h3>
+            <p>Aerospace development, industrial plant maintenance, and mechanical system assembly — NASA Student Launch, a Boeing 777-8F cargo-door mockup, and Siemens centrifugal compressor overhauls.</p>
+            <div class="acts">
+              <a class="btn" href="pdf/Lorenzo-Remy_Mechanical-Systems-Portfolio.pdf" target="_blank">View</a>
+              <a class="btn primary" href="pdf/Lorenzo-Remy_Mechanical-Systems-Portfolio.pdf" download>Download</a>
+            </div>
+          </div>
+        </article>
+        <article class="doc">
+          <div class="thumb"><span class="badge">CAD · DFM</span><img src="img/mold.png" alt="Injection mold core, cavity and slide-action CAD render"></div>
+          <div class="body">
+            <h3>CAD &amp; Design<br>for Manufacturing</h3>
+            <p>Parallel design studies of one part across machining, sheet metal, and injection molding — plus cradle-to-grave 3D-printed aerospace components. Modeled in SolidWorks.</p>
+            <div class="acts">
+              <a class="btn" href="pdf/Lorenzo-Remy_DFM-Design-Portfolio.pdf" target="_blank">View</a>
+              <a class="btn primary" href="pdf/Lorenzo-Remy_DFM-Design-Portfolio.pdf" download>Download</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="shead">
+        <span class="snum">02</span>
+        <h2>Selected Projects</h2>
+        <span class="note">Cradle-to-grave & critical-phase work</span>
+      </div>
+      <div class="projects">
+
+        <div class="proj">
+          <div class="pid">P-01</div>
+          <div class="pmain">
+            <div class="org mono">NASA STUDENT LAUNCH · LMU</div>
+            <h3>High-Powered Rocket — Mechanical Design Lead</h3>
+            <p>Led a 6-person team designing, building, and flight-testing sub-scale and full-scale vehicles. Cut vehicle mass 25% through iterative optimization and a PLA→PETG material change after subscale impact testing; designed a custom rail alignment system keeping the avionics tray flush with the airbrake subsystem.</p>
+            <div class="tags"><span>SolidWorks</span><span>3D Printing</span><span>Avionics Integration</span><span>Flight Test</span></div>
+          </div>
+          <div class="pimg"><img src="img/avionics.png" alt="Assembled 3D-printed avionics tray with dual altimeters"></div>
+        </div>
+
+        <div class="proj">
+          <div class="pid">P-02</div>
+          <div class="pmain">
+            <div class="org mono">BOEING · EVERETT FACTORY</div>
+            <h3>777-8F Main Deck Cargo Door — Full-Scale Mockup</h3>
+            <p>Systems engineering intern on a load-bearing safety restraint mockup. Sourced airframe dimensions, identified mounting points under door-interface and cargo-capacity constraints, led hands-on construction with a 6-person team, and ran load testing across quick-connect hardware iterations.</p>
+            <div class="tags"><span>Mockup Build</span><span>Load Testing</span><span>Hardware Selection</span><span>Team Lead</span></div>
+          </div>
+          <div class="pimg"><img src="img/machined-asm.png" alt="Machined aluminum bracket in CAD assembly"></div>
+        </div>
+
+        <div class="proj">
+          <div class="pid">P-03</div>
+          <div class="pmain">
+            <div class="org mono">RELIABILITY MAINTENANCE SERVICES</div>
+            <h3>Siemens Centrifugal Compressor Overhaul</h3>
+            <p>Complete overhauls of industrial-scale rotating equipment. Performed shaft alignment and leveling to precise tolerances, replaced seals, lubricants and gearing, and worked to API 617 standards for centrifugal compressor maintenance.</p>
+            <div class="tags"><span>Rotating Equipment</span><span>Shaft Alignment</span><span>API 617</span><span>NDT</span></div>
+          </div>
+          <div class="pimg"><img src="img/compressor.png" alt="Siemens centrifugal compressor in process plant"></div>
+        </div>
+
+        <div class="proj">
+          <div class="pid">P-04</div>
+          <div class="pmain">
+            <div class="org mono">DFM CASE STUDY · SOLIDWORKS</div>
+            <h3>One Part, Three Processes — DFM Study</h3>
+            <p>Designed the same functional component for machining (Al 6061, five fixture positions), 14-gauge sheet metal (sequenced bends &amp; stamping), and injection molding (LCP, 2&nbsp;mm walls, 2° draft, slide actions — hitting 17.8&nbsp;lbf flexure within the 15–35&nbsp;lbf target).</p>
+            <div class="tags"><span>Machining</span><span>Sheet Metal</span><span>Injection Molding</span><span>Material Selection</span></div>
+          </div>
+          <div class="pimg"><img src="img/cad-iso.png" alt="Machined part isometric CAD render"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section id="capabilities">
+    <div class="wrap">
+      <div class="shead">
+        <span class="snum">03</span>
+        <h2>Capabilities</h2>
+        <span class="note">Design → manufacture → validate → sustain</span>
+      </div>
+      <div class="caps">
+        <div class="cap">
+          <div class="ct">Design / CAD</div>
+          <ul><li>SolidWorks modeling</li><li>Design for Manufacturing</li><li>Sheet metal &amp; mold design</li><li>Iterative design</li></ul>
+        </div>
+        <div class="cap">
+          <div class="ct">Manufacture</div>
+          <ul><li>CNC machining intent</li><li>3D printing (PLA/PETG)</li><li>Process sequencing</li><li>Material selection</li></ul>
+        </div>
+        <div class="cap">
+          <div class="ct">Test / Validate</div>
+          <ul><li>Subsystem test plans</li><li>Load &amp; redundancy testing</li><li>Flight validation</li><li>NDT — MT &amp; UT (Lvl II)</li></ul>
+        </div>
+        <div class="cap">
+          <div class="ct">Sustain / Maintain</div>
+          <ul><li>Rotating equipment</li><li>Shaft alignment</li><li>API 617 overhaul</li><li>Field maintenance</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- CONTACT / FOOTER -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="fc">
+      <h2>Let's build<br><span class="accent">something.</span></h2>
+      <div class="contacts mono">
+        <a href="mailto:lorenzoremy1999@gmail.com"><span class="k">EMAIL</span> lorenzoremy1999@gmail.com</a>
+        <a href="https://www.linkedin.com/in/lorenzo-remy/" target="_blank" rel="noopener"><span class="k">LINKEDIN</span> /in/lorenzo-remy</a>
+        <a href="https://github.com/lorenzoremy1999" target="_blank" rel="noopener"><span class="k">GITHUB</span> /lorenzoremy1999</a>
+        <a href="tel:+13103403844"><span class="k">PHONE</span> (310) 340 3844</a>
+      </div>
+    </div>
+    <div class="colophon">
+      <span>© <span id="yr"></span> Lorenzo Remy · Mechanical Engineer</span>
+      <span>Los Angeles, CA — Built for the long haul</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  // reveal sections on scroll
+  const io = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.style.animation='rise .7s cubic-bezier(.2,.7,.2,1) forwards'; io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('section .shead, .doc, .proj, .cap').forEach((el,i)=>{
+    el.style.opacity='0'; el.style.transform='translateY(20px)';
+    el.style.animationDelay=(i%4*0.06)+'s';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
