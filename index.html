@@ -131,6 +131,14 @@
   .proj .pimg{height:120px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#0a0c10}
   .proj .pimg img{width:100%;height:100%;object-fit:cover;opacity:.88}
   .proj:hover .pimg img{opacity:1}
+  .pimg.propr{
+    display:flex;align-items:center;justify-content:center;border-color:var(--line2);
+    background:repeating-linear-gradient(45deg,#12151c,#12151c 11px,#0d1016 11px,#0d1016 22px);
+  }
+  .propr-inner{text-align:center;font-family:'IBM Plex Mono',monospace;display:flex;flex-direction:column;gap:5px;align-items:center}
+  .propr-lock{font-size:20px;color:var(--accent);letter-spacing:2px;opacity:.85}
+  .propr-t{font-size:11.5px;letter-spacing:.18em;color:var(--ink)}
+  .propr-s{font-size:10px;letter-spacing:.16em;color:var(--dim)}
   .proj .tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:7px}
   .proj .tags span{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted);border:1px solid var(--line);padding:3px 8px;border-radius:3px}
   @media(max-width:780px){
@@ -153,10 +161,14 @@
   .fc{display:flex;flex-wrap:wrap;justify-content:space-between;gap:30px;align-items:flex-end}
   .fc h2{font-size:clamp(30px,5vw,52px);font-weight:900;letter-spacing:-.03em;line-height:.95}
   .fc .accent{color:var(--accent)}
-  .contacts{display:flex;flex-direction:column;gap:12px}
-  .contacts a{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--muted);display:flex;align-items:center;gap:12px;transition:.2s}
+  .contacts{display:flex;flex-direction:column;gap:14px}
+  .contacts a{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--muted);display:inline-flex;align-items:center;gap:12px;transition:.2s;width:fit-content;cursor:pointer}
   .contacts a:hover{color:var(--accent)}
-  .contacts a .k{color:var(--dim);width:74px;display:inline-block}
+  .contacts a .k{color:var(--dim);width:74px;display:inline-block;flex-shrink:0}
+  .contacts a .v{border-bottom:1px solid var(--line2);padding-bottom:2px;transition:border-color .2s}
+  .contacts a:hover .v{border-color:var(--accent)}
+  .contacts a::after{content:"↗";font-size:11px;opacity:.45;transform:translateX(-3px);transition:.2s}
+  .contacts a:hover::after{opacity:1;transform:none;color:var(--accent)}
   .colophon{margin-top:46px;padding-top:24px;border-top:1px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </style>
 </head>
@@ -220,7 +232,7 @@
           </div>
         </article>
         <article class="doc">
-          <div class="thumb"><span class="badge">CAD · DFM</span><img src="img/mold.png" alt="Injection mold core, cavity and slide-action CAD render"></div>
+          <div class="thumb"><span class="badge">CAD · DFM</span><img src="img/tray-cad.png" alt="3D-printed avionics tray CAD assembly with mounted electronics"></div>
           <div class="body">
             <h3>CAD &amp; Design<br>for Manufacturing</h3>
             <p>Parallel design studies of one part across machining, sheet metal, and injection molding — plus cradle-to-grave 3D-printed aerospace components. Modeled in SolidWorks.</p>
@@ -263,7 +275,7 @@
             <p>Systems engineering intern on a load-bearing safety restraint mockup. Sourced airframe dimensions, identified mounting points under door-interface and cargo-capacity constraints, led hands-on construction with a 6-person team, and ran load testing across quick-connect hardware iterations.</p>
             <div class="tags"><span>Mockup Build</span><span>Load Testing</span><span>Hardware Selection</span><span>Team Lead</span></div>
           </div>
-          <div class="pimg"><img src="img/machined-asm.png" alt="Machined aluminum bracket in CAD assembly"></div>
+          <div class="pimg propr"><div class="propr-inner"><span class="propr-lock">▤ ▤ ▤</span><span class="propr-t">IMAGE WITHHELD</span><span class="propr-s">PROPRIETARY · NDA</span></div></div>
         </div>
 
         <div class="proj">
@@ -280,12 +292,12 @@
         <div class="proj">
           <div class="pid">P-04</div>
           <div class="pmain">
-            <div class="org mono">DFM CASE STUDY · SOLIDWORKS</div>
-            <h3>One Part, Three Processes — DFM Study</h3>
-            <p>Designed the same functional component for machining (Al 6061, five fixture positions), 14-gauge sheet metal (sequenced bends &amp; stamping), and injection molding (LCP, 2&nbsp;mm walls, 2° draft, slide actions — hitting 17.8&nbsp;lbf flexure within the 15–35&nbsp;lbf target).</p>
-            <div class="tags"><span>Machining</span><span>Sheet Metal</span><span>Injection Molding</span><span>Material Selection</span></div>
+            <div class="org mono">COLLABORATIVE DFM · SOLIDWORKS</div>
+            <h3>Paper Towel Dispenser — Multi-Process Build</h3>
+            <p>Cross-functional DFM project building a complete paper-towel dispenser. I owned the sheet-metal enclosure (14-gauge Al 6061, sequenced bends &amp; stamping) and the machined aluminum components — designing both to integrate cleanly with teammates' injection-molded parts and electronics.</p>
+            <div class="tags"><span>Sheet Metal</span><span>CNC Machining</span><span>DFM</span><span>Cross-functional Integration</span></div>
           </div>
-          <div class="pimg"><img src="img/cad-iso.png" alt="Machined part isometric CAD render"></div>
+          <div class="pimg"><img src="img/dispenser.png" alt="Complete paper towel dispenser sheet-metal enclosure CAD assembly"></div>
         </div>
 
       </div>
@@ -328,10 +340,10 @@
     <div class="fc">
       <h2>Let's build<br><span class="accent">something.</span></h2>
       <div class="contacts mono">
-        <a href="mailto:lorenzoremy1999@gmail.com"><span class="k">EMAIL</span> lorenzoremy1999@gmail.com</a>
-        <a href="https://www.linkedin.com/in/lorenzo-remy/" target="_blank" rel="noopener"><span class="k">LINKEDIN</span> /in/lorenzo-remy</a>
-        <a href="https://github.com/lorenzoremy1999" target="_blank" rel="noopener"><span class="k">GITHUB</span> /lorenzoremy1999</a>
-        <a href="tel:+13103403844"><span class="k">PHONE</span> (310) 340 3844</a>
+        <a href="mailto:lorenzoremy1999@gmail.com"><span class="k">EMAIL</span> <span class="v">lorenzoremy1999@gmail.com</span></a>
+        <a href="https://www.linkedin.com/in/lorenzo-remy/" target="_blank" rel="noopener"><span class="k">LINKEDIN</span> <span class="v">/in/lorenzo-remy</span></a>
+        <a href="https://github.com/lorenzoremy1999" target="_blank" rel="noopener"><span class="k">GITHUB</span> <span class="v">/lorenzoremy1999</span></a>
+        <a href="tel:+13103403844"><span class="k">PHONE</span> <span class="v">(310) 340 3844</span></a>
       </div>
     </div>
     <div class="colophon">
