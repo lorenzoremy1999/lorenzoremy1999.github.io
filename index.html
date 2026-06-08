@@ -120,7 +120,7 @@
   /* ---- project list ---- */
   .projects{display:flex;flex-direction:column;gap:0}
   .proj{
-    display:grid;grid-template-columns:90px 1.4fr 1fr;gap:30px;align-items:center;
+    display:grid;grid-template-columns:90px 1fr 210px;gap:30px;align-items:center;
     padding:30px 0;border-top:1px solid var(--line);transition:.2s;
   }
   .proj:hover{background:linear-gradient(90deg,rgba(255,90,44,.04),transparent)}
@@ -128,8 +128,8 @@
   .proj .pmain h3{font-size:20px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
   .proj .pmain .org{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent);letter-spacing:.04em;margin-bottom:10px}
   .proj .pmain p{font-size:14px;color:var(--muted)}
-  .proj .pimg{height:120px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#0a0c10}
-  .proj .pimg img{width:100%;height:100%;object-fit:cover;opacity:.88}
+  .proj .pimg{aspect-ratio:1/1;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#0a0c10;display:flex;align-items:center;justify-content:center;padding:12px}
+  .proj .pimg img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;opacity:.9}
   .proj:hover .pimg img{opacity:1}
   .pimg.propr{
     display:flex;align-items:center;justify-content:center;border-color:var(--line2);
@@ -144,7 +144,7 @@
   @media(max-width:780px){
     .proj{grid-template-columns:1fr;gap:16px}
     .proj .pid{display:none}
-    .proj .pimg{height:170px;order:-1}
+    .proj .pimg{max-width:260px;margin:0 auto;order:-1}
   }
 
   /* ---- capabilities strip ---- */
